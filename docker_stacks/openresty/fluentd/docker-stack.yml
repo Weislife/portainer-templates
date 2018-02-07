@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  openresty:
+    image: openresty/openresty:latest
+    hostname: "openresty-container-{{.Task.Slot}}"
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+    ports:
+      - target: 80
+        protocol: tcp
+        mode: ingress
+    volumes:
+      - type: bind
+        read_only: true
+        source: /etc/localtime
+        target: /etc/localtime
+    
+      - type: volume
+        read_only: false
+        target: /usr/local/openresty/nginx/logs
+    configs:
+      - source: openresty_nginx_conf # 配置项的名称，具体实现在下面
+        target: /usr/local/openresty/nginx/conf/nginx.conf # 容器内部的路径
+        mode: 0444
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        # tag 可以自己定义
+        tag: openresty
+
+configs:
+  openresty_nginx_conf: # 上面引用配置项的具体实现
+    external: true # 这个命令表示该配置项事先已经定义，可以使用docker config命令事先定义，否则会出错

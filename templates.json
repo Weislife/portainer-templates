@@ -1,0 +1,111 @@
+[
+    {
+        "type": "stack",
+        "title": "Gogs",
+        "description": "Gogs setup with a MySQL database",
+        "note": "Deploys a Gogs instance connected to a MySQL database.",
+        "categories": [
+            "DevOps"
+        ],
+        "platform": "linux",
+        "logo": "http://hda.surfrock66.com:720/img/gogs-lg.png",
+        "repository": {
+            "url": "https://github.com/Weislife/portainer-templates",
+            "stackfile": "docker_stacks/gogs/docker-stack.yml"
+        },
+        "env": [
+            {
+                "name": "MYSQL_NODE_HOSTNAME",
+                "label": "Mysql node hostname"
+            },
+            {
+                "name": "MYSQL_ROOT_PASSWORD",
+                "label": "Database root password"
+            },
+            {
+                "name": "MYSQL_DATABASE",
+                "label": "Database name",
+                "set": "gogs"
+            },
+            {
+                "name": "MYSQL_USER",
+                "label": "Database(gogs) username"
+            },
+            {
+                "name": "MYSQL_PASSWORD",
+                "label": "Database(gogs) user password"
+            }
+        ]
+    },
+    {
+        "type": "stack",
+        "title": "Openresty",
+        "description": "Openresty setup",
+        "note": "OpenResty® 是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。",
+        "categories": [
+            "Server",
+            "Proxy"
+        ],
+        "platform": "linux",
+        "logo": "https://ww1.sinaimg.cn/mw690/6d579ff4gw1f69f687lcnj20jt0hwmxv.jpg",
+        "repository": {
+            "url": "https://github.com/Weislife/portainer-templates",
+            "stackfile": "docker_stacks/openresty/docker-stack.yml"
+        }
+    },
+    {
+        "type": "stack",
+        "title": "Mysql",
+        "description": "MySQL single instance setup",
+        "note": "MySQL database single instance setup.",
+        "categories": [
+            "Database"
+        ],
+        "platform": "linux",
+        "logo": "https://dn-sdkcnssl.qbox.me/article/KH4Vv5iREJyuuVXy_Zu3.jpg",
+        "repository": {
+            "url": "https://github.com/Weislife/portainer-templates",
+            "stackfile": "docker_stacks/mysql_single_instance/docker-stack.yml"
+        },
+        "env": [
+            {
+                "name": "MYSQL_NODE_HOSTNAME",
+                "label": "Mysql node hostname"
+            },
+            {
+                "name": "MYSQL_DATABASE",
+                "label": "Database name"
+            },
+            {
+                "name": "MYSQL_USER",
+                "label": "Database username"
+            },
+            {
+                "name": "MYSQL_PASSWORD",
+                "label": "Database user password"
+            }
+        ]
+    },
+    {
+        "type": "stack",
+        "title": "EFK",
+        "description": "EFK single instance setup",
+        "note": "EFK single instance setup.",
+        "categories": [
+            "Log"
+        ],
+        "platform": "linux",
+        "logo": "https://www.fluentd.org/assets/img/miscellany/fluentd-logo.png",
+        "repository": {
+            "url": "https://github.com/Weislife/portainer-templates",
+            "stackfile": "docker_stacks/efk/docker-stack.yml"
+        },
+        "env": [
+            {
+                "name": "DEPLOY_NODE_HOSTNAME",
+                "label": "EFK 部署 node 的 hostname"
+            }
+        ]
+    }
+]
+

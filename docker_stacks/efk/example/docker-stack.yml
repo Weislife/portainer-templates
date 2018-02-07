@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  web:
+    image: httpd
+    ports:
+      - "80:80"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        # tag 可以自己定义
+        tag: httpd.access

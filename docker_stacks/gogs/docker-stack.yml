@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  gogsdb_mysql:
+    image: mysql:latest
+    restart: always
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.hostname == ${MYSQL_NODE_HOSTNAME}
+    ports:
+      - "3306"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/lib/mysql"
+      - "/var/log/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  gogsapp:
+    image: gogs/gogs:latest
+    restart: always
+    deploy:
+      mode: replicated
+    ports:
+      - "22"
+      - "3000"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/data"
+    links:
+      - gogsdb_mysql
+
+
+
+
+
+
+
+
