@@ -9,7 +9,7 @@ services:
       - "24224:24224/udp"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      # fluent.conf
+      # fluent.conf 在宿主机上所在的目录的路径
       - "/fluentd/etc"
     deploy:
       mode: global
@@ -33,7 +33,7 @@ services:
       - "ES_JAVA_OPTS=-Xms300m -Xmx300m"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      # ES data 
+      # ES data 在宿主机上持久化数据目录的路径
       - "/usr/share/elasticsearch/data"
     ulimits:
       memlock:
